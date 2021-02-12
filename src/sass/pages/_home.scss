@@ -1,0 +1,24 @@
+#home {
+  color: $color-white-primary;
+  #products {
+    padding: 4rem 1rem;
+    .see__more {
+      margin-top: $margin-big;
+      a:link,
+      a:visited {
+        border-bottom: 2px solid $color-black-primary;
+        padding: 0.5rem 0.2rem;
+
+        text-decoration: none;
+        color: $color-dark-primary;
+        letter-spacing: $letter-spacing;
+        font-weight: 500;
+        @include transition($transition-1);
+      }
+      a:hover {
+        background-color: $color-dark-primary;
+        color: $color-white-primary;
+      }
+    }
+  }
+}

@@ -1,0 +1,32 @@
+$color-white-primary: #fff;
+$color-black-primary: #333;
+$color-dark-primary: #892628;
+$color-secondary-1: #e99453;
+$color-secondary-1-light: #eb8536;
+
+$transition-1: all 200ms ease-out;
+$transition-with-delay: all 300ms ease-out 100ms;
+$opacity-trans: opacity 200ms ease-out;
+
+$media-smallest: 31.25em;
+
+$scale: 0.8;
+$scale-md: 1;
+$scale-lg: 1.2;
+$margin-bottom: 1.2rem;
+$margin-big: 1.8rem;
+$padding-button: 0.5rem 1.5rem;
+$letter-spacing: 1px;
+$border-radius: 10px;
+
+// breakpoint
+
+$breakPoint-tab: 600px;
+$breakPoint-big: 900px;
+$breakPoint-large: 1200px;
+
+%center-items {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

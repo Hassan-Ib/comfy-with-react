@@ -1,0 +1,21 @@
+@import "../css/all.css";
+@import "./abstract/variables";
+@import "./abstract/mixin";
+
+@import "./base/base";
+@import "./base/typeograghy";
+@import "./base/utilities"; // components
+@import "./components/navigation";
+@import "./components/frame";
+@import "./components/spinner";
+@import "./components/galary";
+@import "./components/filter";
+
+//layouts
+@import "./layouts/header";
+@import "./layouts/features";
+@import "./layouts/cart";
+
+// pages
+@import "./pages/home";
+@import "./pages/products";

@@ -1,0 +1,8 @@
+.product__page {
+  padding: 2.5rem;
+  @include response(lg) {
+    display: flex;
+    flex-wrap: wrap;
+    padding-top: 4rem;
+  }
+}
