@@ -4,11 +4,11 @@ import { Link } from "react-router-dom";
 import { useProductContext } from "../context/context";
 
 const Navbar = () => {
-  const { setIsCartOpen } = useProductContext();
-
+  const { setIsCartOpen, cartItemCalc } = useProductContext();
   const openCartHandler = () => {
     setIsCartOpen(true);
   };
+  const cartValue = cartItemCalc();
 
   return (
     <section className="navigation">
@@ -46,7 +46,7 @@ const Navbar = () => {
       <button onClick={openCartHandler} className="cart__placeholder u-btn">
         <span className="fas fa-shopping-cart cart__placeholder--icon">
           <span className="items-in-cart cart__quantity cart__placeholder--text">
-            20
+            {cartValue ? cartValue.totalQuantity : 0}
           </span>
         </span>
       </button>
