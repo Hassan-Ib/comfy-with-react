@@ -1,8 +1,15 @@
 import React from "react";
 
 import { Link } from "react-router-dom";
+import { useProductContext } from "../context/context";
 
 const Navbar = () => {
+  const { setIsCartOpen } = useProductContext();
+
+  const openCartHandler = () => {
+    setIsCartOpen(true);
+  };
+
   return (
     <section className="navigation">
       <div className="burger">
@@ -36,7 +43,7 @@ const Navbar = () => {
         </ul>
       </nav>
 
-      <button className="cart__placeholder u-btn">
+      <button onClick={openCartHandler} className="cart__placeholder u-btn">
         <span className="fas fa-shopping-cart cart__placeholder--icon">
           <span className="items-in-cart cart__quantity cart__placeholder--text">
             20

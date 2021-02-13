@@ -6,6 +6,7 @@ const localCart = "cart";
 const AppContext = ({ children }) => {
   const [products, setProduct] = useState([]);
   const [cart, setCart] = useState([]);
+  const [isCartOpen, setIsCartOpen] = useState(false);
 
   // get local cart
   const getLocalCart = async () => {
@@ -45,7 +46,9 @@ const AppContext = ({ children }) => {
   }, []);
 
   return (
-    <ProductContext.Provider value={{ products, cart, addToCart }}>
+    <ProductContext.Provider
+      value={{ products, cart, addToCart, isCartOpen, setIsCartOpen }}
+    >
       {children}
     </ProductContext.Provider>
   );
