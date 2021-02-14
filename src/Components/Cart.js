@@ -32,7 +32,7 @@ const Cart = () => {
           {cart ? (
             cart.map((product) => {
               const { id } = product;
-              return <CartProducts key={id} {...cart} />;
+              return <CartProducts key={id} {...product} />;
             })
           ) : (
             <p>cart is empty</p>

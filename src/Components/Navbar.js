@@ -1,18 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { Link } from "react-router-dom";
 import { useProductContext } from "../context/context";
 
 const Navbar = () => {
+  const [isBurgerOpen, setIsBurgerOpen] = useState(false);
   const { setIsCartOpen, cartItemCalc } = useProductContext();
   const openCartHandler = () => {
     setIsCartOpen(true);
   };
   const cartValue = cartItemCalc();
-
+  const handleBurger = () => {
+    setIsBurgerOpen(!isBurgerOpen);
+  };
   return (
     <section className="navigation">
-      <div className="burger">
+      <div
+        onClick={handleBurger}
+        className={`burger ${isBurgerOpen ? "toggle" : null}`}
+      >
         <div className="burger__line"></div>
         <div className="burger__line"></div>
         <div className="burger__line"></div>
@@ -23,7 +29,7 @@ const Navbar = () => {
         <span>furniture</span>
       </Link>
 
-      <nav className="nav">
+      <nav className={`nav ${isBurgerOpen ? "showLinks" : null}`}>
         <ul className="nav__list">
           <li className="nav__item">
             <Link to="/" className="nav__link">

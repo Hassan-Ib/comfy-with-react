@@ -12,7 +12,6 @@ const AppContext = ({ children }) => {
   const getLocalCart = async () => {
     const localValue = window.localStorage.getItem(localCart);
     if (localValue === null) {
-      console.log("not Local object ...");
       setCart([]);
     } else {
       setCart([...JSON.parse(localValue)]);
@@ -29,11 +28,44 @@ const AppContext = ({ children }) => {
     const [item] = products.filter((product) => product.id === id);
     const newItem = { ...item, quantity: 1 };
     setCart([...cart, newItem]);
-    // get data with id form product
-    // add data to cart // create new cart with data in it
-    // set localData ...
   };
-  console.log(cart);
+  const increaseItemQuantity = (id) => {
+    const newCart = cart.map((item) => {
+      if (item.id === id) {
+        item.quantity = item.quantity + 1;
+      }
+      return item;
+    });
+    setCart([...newCart]);
+  };
+  const isItemQuantityLessThanTwo = (id) => {
+    const [item] = cart.filter((item) => item.id === id);
+    if (item.quantity < 2) {
+      return true;
+    }
+
+    return false;
+  };
+  //delete item
+  const deleteItem = (id) => {
+    const newCart = cart.filter((item) => item.id !== id);
+    setCart([...newCart]);
+  };
+  const decreaseItemQuantity = (id) => {
+    const isItemLessThanTwo = isItemQuantityLessThanTwo(id);
+    if (isItemLessThanTwo) {
+      deleteItem(id);
+    } else {
+      const newCart = cart.map((item) => {
+        if (item.id === id) {
+          item.quantity = item.quantity - 1;
+        }
+        return item;
+      });
+      setCart([...newCart]);
+    }
+  };
+
   const cartItemCalc = () => {
     if (cart.length > 0) {
       return cart.reduce(
@@ -76,6 +108,9 @@ const AppContext = ({ children }) => {
         setIsCartOpen,
         cartItemCalc,
         isItemInCart,
+        increaseItemQuantity,
+        decreaseItemQuantity,
+        deleteItem,
       }}
     >
       {children}
