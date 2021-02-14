@@ -1,9 +1,17 @@
 import React from "react";
+import { useProductContext } from "../context/context";
 
 const SaveProduct = ({ imageSource, id, price, title }) => {
+  const { changeCartType, deleteItem } = useProductContext();
   const handleControl = (e) => {
     const btn = e.target;
     console.log(btn);
+    if (btn.classList.contains("delete__btn")) {
+      deleteItem(id);
+    }
+    if (btn.classList.contains("save__btn")) {
+      changeCartType(id, "cart");
+    }
   };
   return (
     <article className="cart__item">

@@ -6,6 +6,7 @@ const CartProducts = ({ imageSource, id, title, price, quantity }) => {
     increaseItemQuantity,
     decreaseItemQuantity,
     deleteItem,
+    changeCartType,
   } = useProductContext();
   const handleControl = (e) => {
     const btn = e.target;
@@ -20,6 +21,7 @@ const CartProducts = ({ imageSource, id, title, price, quantity }) => {
     }
     if (btn.classList.contains("save__btn")) {
       // saveItemToLater(id)
+      changeCartType(id, "later");
     }
   };
   return (

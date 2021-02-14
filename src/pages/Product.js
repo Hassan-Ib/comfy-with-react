@@ -1,16 +1,17 @@
 import React from "react";
-import { Navbar, Cart, Galary } from "../Components";
+import { Navbar, Cart, Galary, Filter } from "../Components";
 import { useProductContext } from "../context/context";
 
 const Product = () => {
-  const { products } = useProductContext();
+  const { productPageProducts } = useProductContext();
 
   return (
     <>
       <Navbar />
       <Cart />
       <section className="product__page">
-        <Galary productList={products} />
+        <Filter />
+        <Galary productList={productPageProducts} />
       </section>
     </>
   );

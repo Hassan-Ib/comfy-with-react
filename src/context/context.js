@@ -7,9 +7,11 @@ const AppContext = ({ children }) => {
   const [products, setProduct] = useState([]);
   const [cart, setCart] = useState([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [productPageProducts, setProductPageProduct] = useState([]);
+  // const [later, setLater] = useState([]);
 
   // get local cart
-  const getLocalCart = async () => {
+  const getLocalData = async () => {
     const localValue = window.localStorage.getItem(localCart);
     if (localValue === null) {
       setCart([]);
@@ -24,11 +26,25 @@ const AppContext = ({ children }) => {
     const [item] = cart.filter((item) => item.id === id);
     return item || false;
   };
+
   const addToCart = (id) => {
+    //is item in later
     const [item] = products.filter((product) => product.id === id);
-    const newItem = { ...item, quantity: 1 };
+    const newItem = { ...item, quantity: 1, cartType: "cart" };
     setCart([...cart, newItem]);
   };
+  const changeCartType = (id, type) => {
+    //remove item from cart
+    const newCart = cart.map((item) => {
+      if (item.id === id) {
+        item.cartType = type;
+        item.quantity = 1;
+      }
+      return item;
+    });
+    setCart([...newCart]);
+  };
+
   const increaseItemQuantity = (id) => {
     const newCart = cart.map((item) => {
       if (item.id === id) {
@@ -68,14 +84,18 @@ const AppContext = ({ children }) => {
 
   const cartItemCalc = () => {
     if (cart.length > 0) {
-      return cart.reduce(
-        (sum, product) => {
-          const { price, quantity } = product;
-          sum.totalPrice = sum.totalPrice + price * quantity;
-          sum.totalQuantity = sum.totalQuantity + quantity;
-          return sum;
-        },
-        { totalQuantity: 0, totalPrice: 0 }
+      return (
+        cart
+          // .filter((item) => item.cartType === "cart")
+          .reduce(
+            (sum, product) => {
+              const { price, quantity } = product;
+              sum.totalPrice = sum.totalPrice + price * quantity;
+              sum.totalQuantity = sum.totalQuantity + quantity;
+              return sum;
+            },
+            { totalQuantity: 0, totalPrice: 0 }
+          )
       );
     }
     return null;
@@ -91,10 +111,11 @@ const AppContext = ({ children }) => {
     });
     if (!newProducts) return;
     setProduct([...newProducts]);
+    setProductPageProduct([...newProducts]);
   };
 
   useEffect(() => {
-    getLocalCart();
+    getLocalData();
     getProduct();
   }, []);
 
@@ -103,14 +124,17 @@ const AppContext = ({ children }) => {
       value={{
         products,
         cart,
-        addToCart,
         isCartOpen,
+        productPageProducts,
+        addToCart,
         setIsCartOpen,
         cartItemCalc,
         isItemInCart,
         increaseItemQuantity,
         decreaseItemQuantity,
         deleteItem,
+        changeCartType,
+        setProductPageProduct,
       }}
     >
       {children}
