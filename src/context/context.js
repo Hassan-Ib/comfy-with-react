@@ -114,6 +114,14 @@ const AppContext = ({ children }) => {
     setProductPageProduct([...newProducts]);
   };
 
+  const filter = (value, filterType)=>{
+    let newPageProducts;
+    if(filterType === title){
+      const newPageProducts = products.filter(product => product[]) 
+
+    }
+  }
+
   useEffect(() => {
     getLocalData();
     getProduct();

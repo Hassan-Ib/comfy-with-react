@@ -1,15 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useProductContext } from "../context/context";
 import styled from "styled-components";
 
 const Filter = () => {
-  const { setProductPageProducts } = useProductContext();
+  const [search, setSearch] = useState("");
+  // const [] = useState()
+  const dragButtonRef = useRef();
+  const searchRef = useRef();
+  const handleSearch = () => {
+    const SearchValue = searchRef.current.value;
+    setSearch(searchValue);
+  };
+  const { setProductPageProducts, filter } = useProductContext();
 
   return (
     <section className="filter">
       <div className="filters-container">
         <form className="input-form">
-          <input type="text" className="search-input" placeholder="search..." />
+          <input
+            ref={searchRef}
+            value={search}
+            onChange={handleSearch}
+            type="text"
+            className="search-input"
+            placeholder="search..."
+          />
         </form>
 
         <h4>Company</h4>
@@ -29,6 +44,8 @@ const Filter = () => {
             min="0"
             value="50"
             max="80"
+            ref={dragButtonRef}
+            onChange={}
           />
         </form>
         <p className="price-value">Value : $80</p>
