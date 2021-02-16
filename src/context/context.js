@@ -114,13 +114,22 @@ const AppContext = ({ children }) => {
     setProductPageProduct([...newProducts]);
   };
 
-  const filter = (value, filterType)=>{
-    let newPageProducts;
-    if(filterType === title){
-      const newPageProducts = products.filter(product => product[]) 
-
-    }
-  }
+  const filter = React.useCallback(
+    (value, filterType) => {
+      let newPageProducts;
+      if (filterType === "title") {
+        const regex = new RegExp(`^${value}`);
+        newPageProducts = products.filter((product) =>
+          regex.test(product.title)
+        );
+      }
+      if (filterType === "price") {
+        newPageProducts = products.filter((product) => product.price === value);
+      }
+      setProductPageProduct([...newPageProducts]);
+    },
+    [products]
+  );
 
   useEffect(() => {
     getLocalData();
@@ -130,18 +139,19 @@ const AppContext = ({ children }) => {
   return (
     <ProductContext.Provider
       value={{
-        products,
         cart,
+        products,
         isCartOpen,
         productPageProducts,
+        filter,
         addToCart,
-        setIsCartOpen,
-        cartItemCalc,
-        isItemInCart,
-        increaseItemQuantity,
-        decreaseItemQuantity,
         deleteItem,
+        isItemInCart,
+        cartItemCalc,
+        setIsCartOpen,
         changeCartType,
+        decreaseItemQuantity,
+        increaseItemQuantity,
         setProductPageProduct,
       }}
     >

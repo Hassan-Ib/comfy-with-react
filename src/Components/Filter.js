@@ -1,22 +1,38 @@
 import React, { useState, useRef } from "react";
 import { useProductContext } from "../context/context";
-import styled from "styled-components";
+// import styled from "styled-components";
+
+// const Wrapper = styled.section`
+//   .filters-container {
+
+//   }
+// `;
 
 const Filter = () => {
+  const { filter } = useProductContext();
   const [search, setSearch] = useState("");
-  // const [] = useState()
+  const [priceFilter, setPriceFilter] = useState(0);
+
   const dragButtonRef = useRef();
   const searchRef = useRef();
   const handleSearch = () => {
     const SearchValue = searchRef.current.value;
-    setSearch(searchValue);
+    setSearch(SearchValue);
   };
-  const { setProductPageProducts, filter } = useProductContext();
+
+  React.useEffect(() => {
+    filter(search, "title");
+  }, [search, filter]);
+  const handlePriceInput = () => {
+    const priceFilterValue = dragButtonRef.current.value;
+    setPriceFilter(priceFilterValue);
+    // console.log(dragButtonRef.current.value);
+  };
 
   return (
     <section className="filter">
       <div className="filters-container">
-        <form className="input-form">
+        <form onSubmit={handleSearch} className="input-form">
           <input
             ref={searchRef}
             value={search}
@@ -39,16 +55,16 @@ const Filter = () => {
         <h4>Price</h4>
         <form className="price-form">
           <input
+            min="0"
+            max="80"
             type="range"
             className="price-filter"
-            min="0"
-            value="50"
-            max="80"
             ref={dragButtonRef}
-            onChange={}
+            value={priceFilter}
+            onChange={handlePriceInput}
           />
         </form>
-        <p className="price-value">Value : $80</p>
+        <p className="price-value">Value : $ {priceFilter}</p>
       </div>
     </section>
   );

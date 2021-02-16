@@ -20,26 +20,30 @@ const AbsoluteP = styled.p`
   font-style: italic;
 `;
 const Product = ({ imageSource, title, price, id }) => {
-  const [isInCart, setIsInCart] = useState(false);
   const { addToCart, isItemInCart } = useProductContext();
+  const [itemMsg, setItemMsg] = useState({
+    state: false,
+    msg: "",
+  });
 
   const addToCartHandler = () => {
     const itemInCart = isItemInCart(id);
     if (itemInCart) {
-      setIsInCart(true);
+      setItemMsg({ ...itemMsg, state: true, msg: "item already in cart" });
       return;
     }
+    setItemMsg({ ...itemMsg, state: true, msg: "item added to cart" });
     addToCart(id);
   };
   useEffect(() => {
     const inCartTimeout = setTimeout(() => {
-      setIsInCart(false);
+      setItemMsg({ ...itemMsg, state: false, msg: "" });
     }, 2000);
 
     return () => {
       clearTimeout(inCartTimeout);
     };
-  }, [isInCart]);
+  }, [itemMsg]);
   return (
     <>
       <StyledArticle className="item">
@@ -58,7 +62,7 @@ const Product = ({ imageSource, title, price, id }) => {
           </div>
         </div>
         <div className="item__description">
-          {isInCart && <AbsoluteP>item already in cart</AbsoluteP>}
+          {itemMsg.state && <AbsoluteP>{itemMsg.msg}</AbsoluteP>}
           <p className="item__name">{title}</p>
           <p className="item__price">${price}</p>
         </div>
