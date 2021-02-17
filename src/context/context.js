@@ -8,7 +8,6 @@ const AppContext = ({ children }) => {
   const [cart, setCart] = useState([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [productPageProducts, setProductPageProduct] = useState([]);
-  // const [later, setLater] = useState([]);
 
   // get local cart
   const getLocalData = async () => {
@@ -117,14 +116,23 @@ const AppContext = ({ children }) => {
   const filter = React.useCallback(
     (value, filterType) => {
       let newPageProducts;
-      if (filterType === "title") {
+      if (filterType === "TITLE") {
         const regex = new RegExp(`^${value}`);
         newPageProducts = products.filter((product) =>
           regex.test(product.title)
         );
       }
-      if (filterType === "price") {
-        newPageProducts = products.filter((product) => product.price === value);
+      if (filterType === "PRICE") {
+        newPageProducts = products.filter((product) => product.price <= value);
+      }
+      if (filterType === "COMPANY") {
+        if (value === "all") {
+          newPageProducts = [...products];
+        } else {
+          newPageProducts = products.filter(
+            (product) => product.company === value
+          );
+        }
       }
       setProductPageProduct([...newPageProducts]);
     },

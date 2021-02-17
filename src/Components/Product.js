@@ -29,10 +29,10 @@ const Product = ({ imageSource, title, price, id }) => {
   const addToCartHandler = () => {
     const itemInCart = isItemInCart(id);
     if (itemInCart) {
-      setItemMsg({ ...itemMsg, state: true, msg: "item already in cart" });
+      setItemMsg({ ...itemMsg, state: true, msg: `${title} already in cart` });
       return;
     }
-    setItemMsg({ ...itemMsg, state: true, msg: "item added to cart" });
+    setItemMsg({ ...itemMsg, state: true, msg: `${title} added to cart` });
     addToCart(id);
   };
   useEffect(() => {

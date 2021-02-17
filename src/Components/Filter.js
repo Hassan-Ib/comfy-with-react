@@ -1,12 +1,32 @@
 import React, { useState, useRef } from "react";
 import { useProductContext } from "../context/context";
-// import styled from "styled-components";
+import styled from "styled-components";
 
-// const Wrapper = styled.section`
-//   .filters-container {
+const Wrapper = styled.section`
+  .filter {
+    @include response(lg) {
+      .companies {
+        display: flex;
+        flex-direction: column;
+        &--btn {
+          font-size: 0.8rem;
+          text-align: left;
+          text-transform: capitalize;
+          letter-spacing: 1px;
 
-//   }
-// `;
+          border: none;
+          box-shadow: none;
+          margin-top: 0.5rem;
+          padding: 0.5rem;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  .filters-container {
+  }
+`;
 
 const Filter = () => {
   const { filter } = useProductContext();
@@ -18,20 +38,23 @@ const Filter = () => {
   const handleSearch = () => {
     const SearchValue = searchRef.current.value;
     setSearch(SearchValue);
+    filter(SearchValue, "TITLE");
   };
 
-  React.useEffect(() => {
-    filter(search, "title");
-  }, [search, filter]);
   const handlePriceInput = () => {
     const priceFilterValue = dragButtonRef.current.value;
     setPriceFilter(priceFilterValue);
-    // console.log(dragButtonRef.current.value);
+    filter(priceFilterValue, "PRICE");
+  };
+  const handleCompanyBtn = (e) => {
+    const btnValue = e.target.innerText;
+    filter(btnValue, "COMPANY");
+    // console.log(btnValue);
   };
 
   return (
     <section className="filter">
-      <div className="filters-container">
+      <div className="filter filters-container">
         <form onSubmit={handleSearch} className="input-form">
           <input
             ref={searchRef}
@@ -42,9 +65,8 @@ const Filter = () => {
             placeholder="search..."
           />
         </form>
-
         <h4>Company</h4>
-        <article className="companies">
+        <article onClick={handleCompanyBtn} className="companies">
           <button className="companies-btn">all</button>
           <button className="companies-btn">ikea</button>
           <button className="companies-btn">marcos</button>

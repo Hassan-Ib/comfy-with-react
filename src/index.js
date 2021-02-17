@@ -4,10 +4,12 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import { AppContext } from "./context/context";
 // import reportWebVitals from "./reportWebVitals";
+import { Global } from "./style";
 
 ReactDOM.render(
   <React.StrictMode>
     <AppContext>
+      <Global />
       <App />
     </AppContext>
   </React.StrictMode>,

@@ -4,13 +4,15 @@
   margin: 0 auto;
   color: $color-white-primary;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  justify-content: flex-start;
   gap: 1rem;
 
   .item {
     box-shadow: 0 0 0.5rem rgba($color-dark-primary, 0.6);
     background-color: $color-white-primary;
     padding-bottom: 2rem;
+    align-self: left;
 
     &__container {
       position: relative;

@@ -1,4 +1,4 @@
-@mixin response($breakpoint) {
+ @mixin response($breakpoint) {
   @if $breakpoint == tab {
     @media screen and (min-width: 37.5em) {
       @content;

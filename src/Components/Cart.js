@@ -6,7 +6,6 @@ import SaveProduct from "./SaveProduct";
 const Cart = () => {
   const { isCartOpen, setIsCartOpen, cart, cartItemCalc } = useProductContext();
   const isLaterItem = cart.filter((item) => item.cartType === "later").length;
-  console.log(isLaterItem);
   const handleCartClose = () => {
     setIsCartOpen(false);
   };
