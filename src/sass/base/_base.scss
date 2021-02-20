@@ -31,9 +31,11 @@ body {
   width: 100%;
   color: $color-dark-primary;
 }
+a,
 a:link,
 a:visited {
   display: inline-block;
+  text-decoration: none;
 }
 ul,
 ol {
