@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 
 const StyledArticle = styled.article`
   position: relative;
+  a {
+  }
 `;
 const AbsoluteP = styled.p`
   color: red;
@@ -18,6 +20,12 @@ const AbsoluteP = styled.p`
   letter-spacing: 2px;
   text-decoration: capitalize;
   font-style: italic;
+`;
+
+const StyledLink = styled(Link)`
+  color: #fff;
+  text-decoration: none;
+  display: inline-block;
 `;
 const Product = ({ imageSource, title, price, id }) => {
   const { addToCart, isItemInCart } = useProductContext();
@@ -38,7 +46,7 @@ const Product = ({ imageSource, title, price, id }) => {
   useEffect(() => {
     const inCartTimeout = setTimeout(() => {
       setItemMsg({ ...itemMsg, state: false, msg: "" });
-    }, 2000);
+    }, 1000);
 
     return () => {
       clearTimeout(inCartTimeout);
@@ -50,14 +58,19 @@ const Product = ({ imageSource, title, price, id }) => {
         <div className="item__container">
           <img src={imageSource} alt={title} className="item__image" />
           <div className="item__btn">
-            <Link to={`/product/${id}`} className="btn item__btn--search u-btn">
-              <span className="fas fa-search"></span>
-            </Link>
+            <StyledLink
+              to={`/product/${id}`}
+              className="btn u-btn item__btn--search fas fa-search"
+            >
+              {" "}
+              view
+            </StyledLink>
+
             <button
               onClick={addToCartHandler}
               className="btn item__btn--cart u-btn"
             >
-              <span className="fas fa-shopping-cart"></span>
+              cart <span className="fas fa-shopping-cart"></span>
             </button>
           </div>
         </div>

@@ -1,37 +1,32 @@
 import React, { useState, useRef } from "react";
 import { useProductContext } from "../context/context";
-import styled from "styled-components";
-
-const Wrapper = styled.section`
-  .filter {
-    @include response(lg) {
-      .companies {
-        display: flex;
-        flex-direction: column;
-        &--btn {
-          font-size: 0.8rem;
-          text-align: left;
-          text-transform: capitalize;
-          letter-spacing: 1px;
-
-          border: none;
-          box-shadow: none;
-          margin-top: 0.5rem;
-          padding: 0.5rem;
-          cursor: pointer;
-        }
-      }
-    }
-  }
-
-  .filters-container {
-  }
-`;
 
 const Filter = () => {
-  const { filter } = useProductContext();
+  const { setProductPageProduct, products } = useProductContext();
   const [search, setSearch] = useState("");
   const [priceFilter, setPriceFilter] = useState(0);
+
+  const filter = (value, filterType) => {
+    let newPageProducts;
+    if (filterType === "TITLE") {
+      const regex = new RegExp(`^${value}`);
+      newPageProducts = products.filter((product) => regex.test(product.title));
+    }
+    if (filterType === "PRICE") {
+      newPageProducts = products.filter((product) => product.price <= value);
+    }
+    if (filterType === "COMPANY") {
+      if (value === "All") {
+        console.log(value);
+        newPageProducts = [...products];
+      } else {
+        newPageProducts = products.filter(
+          (product) => product.company === value.toLowerCase()
+        );
+      }
+    }
+    setProductPageProduct([...newPageProducts]);
+  };
 
   const dragButtonRef = useRef();
   const searchRef = useRef();
@@ -47,13 +42,17 @@ const Filter = () => {
     filter(priceFilterValue, "PRICE");
   };
   const handleCompanyBtn = (e) => {
-    const btnValue = e.target.innerText;
-    filter(btnValue, "COMPANY");
+    const btn = e.target;
+    if (btn.classList.contains("companies-btn")) {
+      const btnValue = btn.innerText;
+      filter(btnValue, "COMPANY");
+    }
+
     // console.log(btnValue);
   };
 
   return (
-    <section className="filter">
+    <section className="">
       <div className="filter filters-container">
         <form onSubmit={handleSearch} className="input-form">
           <input
@@ -65,8 +64,8 @@ const Filter = () => {
             placeholder="search..."
           />
         </form>
-        <h4>Company</h4>
         <article onClick={handleCompanyBtn} className="companies">
+          <h4>Companies</h4>
           <button className="companies-btn">all</button>
           <button className="companies-btn">ikea</button>
           <button className="companies-btn">marcos</button>
@@ -74,19 +73,21 @@ const Filter = () => {
           <button className="companies-btn">liddy</button>
         </article>
 
-        <h4>Price</h4>
         <form className="price-form">
+          <h4>Price range</h4>
           <input
+            name="price"
             min="0"
-            max="80"
+            max="100"
             type="range"
             className="price-filter"
             ref={dragButtonRef}
             value={priceFilter}
             onChange={handlePriceInput}
           />
+          <br />
+          <p className="price-value">Value : $ {priceFilter}</p>
         </form>
-        <p className="price-value">Value : $ {priceFilter}</p>
       </div>
     </section>
   );

@@ -1,7 +1,6 @@
 /* features */
 .grid__parent {
   max-width: 1100px;
-  margin: 0 auto;
   color: $color-white-primary;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -29,7 +28,7 @@
       .item__btn {
         display: flex;
         justify-content: space-around;
-        padding: 1rem 6rem;
+        padding: 1rem 3rem;
         overflow: hidden;
         align-items: center;
         &--cart,
@@ -42,7 +41,8 @@
       }
       @include response(lg) {
         .item__btn {
-          justify-content: space-around;
+          // justify-content: space-between;
+          padding: 1rem 2rem;
           position: absolute;
           color: $color-white-primary;
           z-index: -1;

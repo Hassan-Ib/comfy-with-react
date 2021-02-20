@@ -1,20 +1,28 @@
 .filter {
+  display: flex;
+  justify-content: space-around;
+  .companies {
+    flex: 0 1 40%;
+    // display: flex;
+    // flex-direction: column;
+    &-btn {
+      font-size: 0.8rem;
+      text-align: left;
+      text-transform: capitalize;
+      letter-spacing: 1px;
+
+      border: none;
+      box-shadow: none;
+      margin-top: 0.5rem;
+      padding: 0.5rem;
+      cursor: pointer;
+    }
+  }
   @include response(lg) {
+    flex-direction: column;
     .companies {
       display: flex;
       flex-direction: column;
-      &--btn {
-        font-size: 0.8rem;
-        text-align: left;
-        text-transform: capitalize;
-        letter-spacing: 1px;
-
-        border: none;
-        box-shadow: none;
-        margin-top: 0.5rem;
-        padding: 0.5rem;
-        cursor: pointer;
-      }
     }
   }
 }

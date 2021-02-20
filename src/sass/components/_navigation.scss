@@ -63,10 +63,10 @@
     & > * {
       display: inline-block;
       border: 2px solid $color-dark-primary;
-    }
-    & > * + * {
       color: $color-secondary-1;
       border-color: $color-secondary-1;
+    }
+    & > * + * {
       margin-left: 2rem;
       margin-top: -3px;
       border-top: 4px solid;

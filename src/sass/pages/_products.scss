@@ -3,6 +3,12 @@
   @include response(lg) {
     display: flex;
     flex-wrap: wrap;
+    // justify-content: space-around;
+
     padding-top: 4rem;
+
+    & > * + * {
+      margin-left: 4rem;
+    }
   }
 }

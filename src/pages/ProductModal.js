@@ -1,14 +1,20 @@
 import React from "react";
 import { useParams, Link } from "react-router-dom";
+import { useProductContext } from "../context/context";
 
 const ProductModal = () => {
   const { id } = useParams();
+  const { products } = useProductContext();
   console.log(id);
+  const [product] = products.filter((product) => product.id === id);
+  console.log(product);
+  // const { title, price, company } = product;
   return (
-    <div>
-      ProductModal
+    <article>
+      <div className="image">{/* <img src={imageSource} alt={title} /> */}</div>
       <Link to="/products">Go back home</Link>
-    </div>
+      <p>{product.title}</p>
+    </article>
   );
 };
 
