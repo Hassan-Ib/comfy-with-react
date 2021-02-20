@@ -12,13 +12,16 @@ const ProductModal = () => {
     const [product] = products.filter((product) => product.id === id);
     console.log(product);
     return (
-      <article className="u-center">
-        <div className="image">
-          <img src={product.imageSource} alt={product.title} />
+      <article className="u-center product__modal">
+        <div className="">
+          <p className="u-section__title">{product.title}</p>
+          <div className="image">
+            <img src={product.imageSource} alt={product.title} />
+          </div>
+          <Link to="/products" className="u-btn-link u-link-hover">
+            Go back home
+          </Link>
         </div>
-        <Link to="/products" className="u-btn-link u-btn">
-          Go back home
-        </Link>
       </article>
     );
   }

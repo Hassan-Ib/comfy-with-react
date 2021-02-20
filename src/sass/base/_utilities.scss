@@ -43,7 +43,15 @@
   align-items: center;
 }
 .u-btn-link {
-  border: 2px solid $color-dark-primary;
+  border-bottom: 2px solid $color-dark-primary;
+  padding: 0.5rem 0.2rem;
+  color: $color-dark-primary;
+  font-weight: 500;
+  letter-spacing: $letter-spacing;
 }
-.u-section {
+.u-link-hover {
+  &:hover {
+    background-color: $color-dark-primary;
+    color: $color-white-primary;
+  }
 }
