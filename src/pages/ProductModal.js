@@ -4,12 +4,13 @@ import { useProductContext } from "../context/context";
 import { Loader } from "../Components";
 
 const ProductModal = () => {
-  const { id } = useParams();
+  const { id, page } = useParams();
+  // console.log(id, page);
   const { products } = useProductContext();
 
   if (products.length !== 0) {
     const [product] = products.filter((product) => product.id === id);
-    console.log(product);
+    // console.log(product);
     return (
       <article className="u-center product__modal">
         <div className="">
@@ -17,8 +18,11 @@ const ProductModal = () => {
           <div className="image">
             <img src={product.imageSource} alt={product.title} />
           </div>
-          <Link to="/products" className="u-btn-link u-link-hover">
-            Go back home
+          <Link
+            to={page === "home" ? "/" : `/${page}`}
+            className="u-btn-link u-link-hover"
+          >
+            Go back {page}
           </Link>
         </div>
       </article>

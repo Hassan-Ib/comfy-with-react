@@ -27,7 +27,7 @@ const StyledLink = styled(Link)`
   text-decoration: none;
   display: inline-block;
 `;
-const Product = ({ imageSource, title, price, id }) => {
+const Product = ({ imageSource, title, price, id, page }) => {
   const { addToCart, isItemInCart } = useProductContext();
   const [itemMsg, setItemMsg] = useState({
     state: false,
@@ -59,7 +59,7 @@ const Product = ({ imageSource, title, price, id }) => {
           <img src={imageSource} alt={title} className="item__image" />
           <div className="item__btn">
             <StyledLink
-              to={`/product/${id}`}
+              to={`/product/${id}${page}`}
               className="btn u-btn item__btn--search fas fa-search"
             >
               {" "}

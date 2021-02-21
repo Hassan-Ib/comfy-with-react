@@ -59,7 +59,7 @@ const Home = () => {
               we feature products that makes home really feels like home
             </h3>
           </div>
-          <Galary productList={homeProduct || null} />
+          <Galary page="home" productList={homeProduct || null} />
           <div className="see__more u-center">
             <Link to="/products">
               Check more products <span className="fas fa-arrow-right"></span>

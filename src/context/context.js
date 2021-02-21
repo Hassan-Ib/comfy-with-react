@@ -17,17 +17,51 @@ const AppContext = ({ children }) => {
   const [productPageProducts, setProductPageProduct] = useState([]);
 
   // get local cart
-  const getLocalData = async () => {
+  const getLocalData = () => {
     const localValue = window.localStorage.getItem(localCart);
+    console.log(localValue);
     if (localValue === null) {
       setCart([]);
     } else {
       setCart([...JSON.parse(localValue)]);
     }
   };
-  //   const setCartLocally =()=>{
-  //     window.localStorage.setItem(localCart, JSON.stringify(Cart))
-  //   }
+
+  const getProduct = React.useCallback(async () => {
+    try {
+      // const contentfull = await Promise.race([
+      //   client.getEntries({
+      //     content_type: "furnitureProduct",
+      //   }),
+      //   timeOut(),
+      // ]);
+      // const newProducts = contentfull.items.map((product) => {
+      const newProducts = data?.items.map((product) => {
+        const { id } = product.sys;
+        const { price, title } = product.fields;
+        const { url: imageSource } = product.fields.image.fields.file;
+        const { company } = product.fields;
+        return { id, price, title, imageSource, company };
+      });
+      if (!newProducts) return;
+      setProduct([...newProducts]);
+      setProductPageProduct([...newProducts]);
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+
+  useEffect(() => {
+    getLocalData();
+    getProduct();
+  }, [getProduct]);
+
+  const setCartLocally = () => {
+    window.localStorage.setItem(localCart, JSON.stringify(cart));
+  };
+
+  useEffect(setCartLocally, [cart]);
+
   const isItemInCart = (id) => {
     const [item] = cart.filter((item) => item.id === id);
     return item || false;
@@ -38,7 +72,10 @@ const AppContext = ({ children }) => {
     const [item] = products.filter((product) => product.id === id);
     const newItem = { ...item, quantity: 1, cartType: "cart" };
     setCart([...cart, newItem]);
+    console.log(cart);
   };
+  console.log(cart);
+
   const changeCartType = (id, type) => {
     //remove item from cart
     const newCart = cart.map((item) => {
@@ -48,7 +85,9 @@ const AppContext = ({ children }) => {
       }
       return item;
     });
+    console.log(cart);
     setCart([...newCart]);
+    console.log(cart);
   };
 
   const increaseItemQuantity = (id) => {
@@ -60,6 +99,7 @@ const AppContext = ({ children }) => {
     });
     setCart([...newCart]);
   };
+
   const isItemQuantityLessThanTwo = (id) => {
     const [item] = cart.filter((item) => item.id === id);
     if (item.quantity < 2) {
@@ -73,6 +113,7 @@ const AppContext = ({ children }) => {
     const newCart = cart.filter((item) => item.id !== id);
     setCart([...newCart]);
   };
+
   const decreaseItemQuantity = (id) => {
     const isItemLessThanTwo = isItemQuantityLessThanTwo(id);
     if (isItemLessThanTwo) {
@@ -107,41 +148,13 @@ const AppContext = ({ children }) => {
     return null;
   };
 
-  const timeOut = () => {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve(false);
-      }, 500);
-    });
-  };
-  const getProduct = React.useCallback(async () => {
-    try {
-      // const contentfull = await Promise.race([
-      //   client.getEntries({
-      //     content_type: "furnitureProduct",
-      //   }),
-      //   timeOut(),
-      // ]);
-      // const newProducts = contentfull.items.map((product) => {
-      const newProducts = data?.items.map((product) => {
-        const { id } = product.sys;
-        const { price, title } = product.fields;
-        const { url: imageSource } = product.fields.image.fields.file;
-        const { company } = product.fields;
-        return { id, price, title, imageSource, company };
-      });
-      if (!newProducts) return;
-      setProduct([...newProducts]);
-      setProductPageProduct([...newProducts]);
-    } catch (error) {
-      console.log(error);
-    }
-  }, []);
-
-  useEffect(() => {
-    getLocalData();
-    getProduct();
-  }, [getProduct]);
+  // const timeOut = () => {
+  //   return new Promise((resolve, reject) => {
+  //     setTimeout(() => {
+  //       resolve(false);
+  //     }, 500);
+  //   });
+  // };
 
   return (
     <ProductContext.Provider

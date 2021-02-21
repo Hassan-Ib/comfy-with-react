@@ -11,7 +11,7 @@ const Product = () => {
       <Cart />
       <section className="product__page">
         <Filter />
-        <Galary productList={productPageProducts} />
+        <Galary page="products" productList={productPageProducts} />
       </section>
     </>
   );

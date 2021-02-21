@@ -16,7 +16,7 @@ function App() {
         <Route path="/about">
           <About />
         </Route>
-        <Route path="/product/:id">
+        <Route path="/product/:id:page">
           <ProductModal />
         </Route>
         <Route path="*">

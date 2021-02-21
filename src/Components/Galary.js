@@ -1,7 +1,8 @@
 import React from "react";
 import Product from "./Product";
 
-const Galary = ({ productList }) => {
+const Galary = ({ page, productList }) => {
+  console.log(page);
   if (!productList) {
     return (
       <>
@@ -16,7 +17,7 @@ const Galary = ({ productList }) => {
     <div className="grid__parent">
       {productList.map((product) => {
         const { id } = product;
-        return <Product {...product} key={id} />;
+        return <Product page={page} {...product} key={id} />;
       })}
     </div>
   );
