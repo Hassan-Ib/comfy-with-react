@@ -1,6 +1,13 @@
 import React, { useState, useEffect, useContext } from "react";
 import data from "./data";
 
+// const client = contentful.createClient({
+//   // This is the space ID. A space is like a project folder in Contentful terms
+//   space: "vajel9mfz0r6",
+//   // This is the access token for this space. Normally you get both ID and the token in the Contentful web app
+//   accessToken: "W3UjDMEZRW869nRjFz0i9QwA7KdSZi6KWCirjeEVpJQ",
+// });
+
 const ProductContext = React.createContext();
 const localCart = "cart";
 const AppContext = ({ children }) => {
@@ -100,49 +107,41 @@ const AppContext = ({ children }) => {
     return null;
   };
 
-  const getProduct = async () => {
-    const newProducts = data?.items.map((product) => {
-      const { id } = product.sys;
-      const { price, title } = product.fields;
-      const { url: imageSource } = product.fields.image.fields.file;
-      const { company } = product.fields;
-      return { id, price, title, imageSource, company };
+  const timeOut = () => {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve(false);
+      }, 500);
     });
-    if (!newProducts) return;
-    setProduct([...newProducts]);
-    setProductPageProduct([...newProducts]);
   };
-
-  const filter = React.useCallback(
-    (value, filterType) => {
-      let newPageProducts;
-      if (filterType === "TITLE") {
-        const regex = new RegExp(`^${value}`);
-        newPageProducts = products.filter((product) =>
-          regex.test(product.title)
-        );
-      }
-      if (filterType === "PRICE") {
-        newPageProducts = products.filter((product) => product.price <= value);
-      }
-      if (filterType === "COMPANY") {
-        if (value === "all") {
-          newPageProducts = [...products];
-        } else {
-          newPageProducts = products.filter(
-            (product) => product.company === value
-          );
-        }
-      }
-      setProductPageProduct([...newPageProducts]);
-    },
-    [products]
-  );
+  const getProduct = React.useCallback(async () => {
+    try {
+      // const contentfull = await Promise.race([
+      //   client.getEntries({
+      //     content_type: "furnitureProduct",
+      //   }),
+      //   timeOut(),
+      // ]);
+      // const newProducts = contentfull.items.map((product) => {
+      const newProducts = data?.items.map((product) => {
+        const { id } = product.sys;
+        const { price, title } = product.fields;
+        const { url: imageSource } = product.fields.image.fields.file;
+        const { company } = product.fields;
+        return { id, price, title, imageSource, company };
+      });
+      if (!newProducts) return;
+      setProduct([...newProducts]);
+      setProductPageProduct([...newProducts]);
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
 
   useEffect(() => {
     getLocalData();
     getProduct();
-  }, []);
+  }, [getProduct]);
 
   return (
     <ProductContext.Provider
@@ -151,7 +150,6 @@ const AppContext = ({ children }) => {
         products,
         isCartOpen,
         productPageProducts,
-        filter,
         addToCart,
         deleteItem,
         isItemInCart,

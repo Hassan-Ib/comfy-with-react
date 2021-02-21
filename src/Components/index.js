@@ -5,5 +5,6 @@ import Product from "./Product";
 import Galary from "./Galary";
 import Cart from "./Cart";
 import Filter from "./Filter";
+import Loader from "./Loader";
 
-export { Galary, Button, Hero, Navbar, Product, Cart, Filter };
+export { Galary, Button, Hero, Navbar, Product, Cart, Filter, Loader };

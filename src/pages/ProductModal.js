@@ -1,8 +1,7 @@
 import React from "react";
 import { useParams, Link } from "react-router-dom";
 import { useProductContext } from "../context/context";
-import styled from "styled-components";
-const ProductView = styled.article``;
+import { Loader } from "../Components";
 
 const ProductModal = () => {
   const { id } = useParams();
@@ -25,10 +24,9 @@ const ProductModal = () => {
       </article>
     );
   }
-
-  // console.log(products);
   return (
     <article>
+      <Loader />
       <Link to="/products">Go back home</Link>
     </article>
   );
