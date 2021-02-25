@@ -20,8 +20,9 @@ const Filter = () => {
         console.log(value);
         newPageProducts = [...products];
       } else {
-        newPageProducts = products.filter(
-          (product) => product.company === value.toLowerCase()
+        const creatorRegexp = new RegExp(value, "i");
+        newPageProducts = products.filter((product) =>
+          creatorRegexp.test(product.creator)
         );
       }
     }

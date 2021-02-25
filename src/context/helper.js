@@ -7,12 +7,12 @@ const query = `
       sys{
         id
       }
+      creator
       title,
       price,
       image {
         url
       },
-      creator
       
     }
   }
@@ -46,6 +46,7 @@ const destructureFetchProduct = (item) => {
     title,
     creator,
   } = item;
+  console.log(creator);
   return { imageSource, price, title, creator, id };
 };
 const fetchProduct = async () => {
