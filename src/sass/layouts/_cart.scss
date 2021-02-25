@@ -1,13 +1,13 @@
 .cart {
   &__overlay {
     position: fixed;
-    // position: absolute;
+    padding-bottom: 1rem;
     z-index: 100;
     width: 100%;
     top: 0;
     left: 0;
     background-color: rgba($color-secondary-1, 0.4);
-    @include transform(translateX(120vw));
+    @include transform(translateY(120vw));
     @include transition($transition-1);
     &.cart--open {
       @include transform(translateX(0%));
@@ -38,19 +38,19 @@
       display: grid;
       grid-template-columns: 1fr;
       gap: 1rem;
-      justify-items: center;
+      // justify-items: center;
     }
     .cart__item {
       min-width: 200px;
       max-width: 350px;
       padding: 1rem 1.5rem;
       background-color: $color-white-primary;
-      box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.3);
+      border-bottom: 1px solid black;
 
       &--img {
         min-width: 150px;
         height: 150px;
-        border: 1px solid black;
+        // border: 0.5px solid black;
         margin-right: 1.5rem;
       }
       &--title,
@@ -65,7 +65,7 @@
     }
     .item--grid {
       display: flex;
-      align-items: center;
+      // align-items: center;
     }
 
     .cart--img {
@@ -94,6 +94,7 @@
     .plus-item {
       padding: 0.3rem 1rem;
     }
+
     .cart--btn:hover {
       background-color: rgba($color-dark-primary, 0.2);
     }

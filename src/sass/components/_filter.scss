@@ -3,11 +3,9 @@
   justify-content: space-around;
   .companies {
     flex: 0 1 40%;
-    // display: flex;
-    // flex-direction: column;
     &-btn {
       font-size: 0.8rem;
-      text-align: left;
+      text-align: center;
       text-transform: capitalize;
       letter-spacing: 1px;
 

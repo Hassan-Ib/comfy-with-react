@@ -42,7 +42,7 @@ const Cart = () => {
             <p>cart is empty</p>
           )}
         </section>
-        <div className="cart__container--header">
+        <div className="cart__container--header margin-top-md">
           {isLaterItem ? (
             <h3 className="title">
               Number of items saved for later {isLaterItem}

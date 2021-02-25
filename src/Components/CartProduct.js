@@ -44,7 +44,9 @@ const CartProducts = ({ imageSource, id, title, price, quantity }) => {
         </div>
 
         <button className="u-btn delete__btn cart--btn ">delete</button>
-        <button className="u-btn save__btn cart--btn">save for later</button>
+        <button className="u-btn save__btn cart--btn margin-left">
+          save for later
+        </button>
       </div>
     </article>
   );

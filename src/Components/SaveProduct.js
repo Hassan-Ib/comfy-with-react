@@ -26,8 +26,10 @@ const SaveProduct = ({ imageSource, id, price, title }) => {
         </div>
       </div>
       <div className="cart__item--control" onClick={handleControl}>
-        <button className="u-btn delete__btn cart--btn ">delete</button>
-        <button className="u-btn save__btn cart--btn">add to cart</button>
+        <button className="u-btn delete__btn cart--btn">delete</button>
+        <button className="u-btn save__btn cart--btn margin-left">
+          add to cart
+        </button>
       </div>
     </article>
   );
