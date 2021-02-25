@@ -2,7 +2,6 @@ import React from "react";
 import Product from "./Product";
 
 const Galary = ({ page, productList }) => {
-  console.log(page);
   if (!productList) {
     return (
       <>

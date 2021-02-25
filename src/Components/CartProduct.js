@@ -1,5 +1,5 @@
 import React from "react";
-import { useProductContext } from "../context/context";
+import { useProductContext } from "../context";
 
 const CartProducts = ({ imageSource, id, title, price, quantity }) => {
   const {
@@ -28,7 +28,7 @@ const CartProducts = ({ imageSource, id, title, price, quantity }) => {
     <article className="cart__item">
       <div className="item--grid">
         <div className="cart__item--img">
-          <img src={imageSource} alt={title} />
+          <img src={imageSource} alt={title} className="image-fit" />
         </div>
         <div className="cart__item--desc">
           <p className="cart__item--title">{title}</p>

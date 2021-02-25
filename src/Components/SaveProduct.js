@@ -1,5 +1,5 @@
 import React from "react";
-import { useProductContext } from "../context/context";
+import { useProductContext } from "../context";
 
 const SaveProduct = ({ imageSource, id, price, title }) => {
   const { changeCartType, deleteItem } = useProductContext();

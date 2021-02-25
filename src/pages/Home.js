@@ -1,15 +1,18 @@
 import React from "react";
-import { Navbar, Cart, Galary } from "../Components";
+import { Navbar, Cart, Galary, Loader } from "../Components";
 import { Link } from "react-router-dom";
-import { useProductContext } from "../context/context";
+import { useProductContext } from "../context";
 // import Cart from
 import FrameImgBig from "../images/frame-big.jpg";
 import FrameImgSm1 from "../images/frame-small-1.jpg";
 import FrameImgSm2 from "../images/frame-small-2.jpg";
 
 const Home = () => {
-  const { products } = useProductContext();
+  const { products, isLoading } = useProductContext();
   const homeProduct = products.filter((product) => product.price < 20);
+  if (isLoading) {
+    return <Loader />;
+  }
   return (
     <>
       <Navbar />

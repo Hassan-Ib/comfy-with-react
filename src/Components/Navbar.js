@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import { Link } from "react-router-dom";
-import { useProductContext } from "../context/context";
+import { useProductContext } from "../context";
 
 const Navbar = () => {
   const [isBurgerOpen, setIsBurgerOpen] = useState(false);

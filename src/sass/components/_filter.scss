@@ -1,5 +1,6 @@
 .filter {
   display: flex;
+  flex-direction: column;
   justify-content: space-around;
   .companies {
     flex: 0 1 40%;

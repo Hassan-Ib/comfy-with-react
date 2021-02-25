@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 // import './index.css';
 import App from "./App";
-import { AppContext } from "./context/context";
+import { AppContext } from "./context";
 // import reportWebVitals from "./reportWebVitals";
 import { Global } from "./style";
 

@@ -1,16 +1,15 @@
 import React from "react";
 import { useParams, Link } from "react-router-dom";
-import { useProductContext } from "../context/context";
+import { useProductContext } from "../context";
 import { Loader } from "../Components";
 
 const ProductModal = () => {
   const { id, page } = useParams();
-  // console.log(id, page);
   const { products } = useProductContext();
 
   if (products.length !== 0) {
     const [product] = products.filter((product) => product.id === id);
-    // console.log(product);
+    // console.log(products.filter((product) => product.id === id));
     return (
       <article className="u-center product__modal">
         <div className="">

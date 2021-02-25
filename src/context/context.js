@@ -1,25 +1,47 @@
 import React, { useState, useEffect, useContext } from "react";
-import data from "./data";
+// import data from "./data";
+import { timeOut, contenful, localCart } from "./helper";
 
-// const client = contentful.createClient({
-//   // This is the space ID. A space is like a project folder in Contentful terms
-//   space: "vajel9mfz0r6",
-//   // This is the access token for this space. Normally you get both ID and the token in the Contentful web app
-//   accessToken: "W3UjDMEZRW869nRjFz0i9QwA7KdSZi6KWCirjeEVpJQ",
-// });
+// explore?access_token=W3UjDMEZRW869nRjFz0i9QwA7KdSZi6KWCirjeEVpJQ`
 
+// create context
 const ProductContext = React.createContext();
-const localCart = "cart";
+
+// context provider
 const AppContext = ({ children }) => {
   const [products, setProduct] = useState([]);
   const [cart, setCart] = useState([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [productPageProducts, setProductPageProduct] = useState([]);
-
+  // const [LoadError, setLoadError] = useState({
+  //   state : false,
+  //   message : ""
+  // })
   // get local cart
+  const fetchProduct = async () => {
+    try {
+      const response = await Promise.race([contenful(), timeOut]);
+      if (!response.timeOut) {
+        if (!response.ok) {
+          throw new Error("failed to fetch data");
+        }
+        console.log(response);
+        const {
+          data: {
+            furnitureProductCollection: { items },
+          },
+        } = await response.json();
+        return items;
+      }
+      throw new Error(response.msg);
+    } catch (error) {
+      throw new Error(error);
+    }
+  };
+
   const getLocalData = () => {
     const localValue = window.localStorage.getItem(localCart);
-    console.log(localValue);
     if (localValue === null) {
       setCart([]);
     } else {
@@ -27,27 +49,31 @@ const AppContext = ({ children }) => {
     }
   };
 
+  const destructureFetchProduct = (item) => {
+    const {
+      sys: { id },
+      image: { url: imageSource },
+      price,
+      title,
+      creator,
+    } = item;
+    return { imageSource, price, title, creator, id };
+  };
+
   const getProduct = React.useCallback(async () => {
     try {
-      // const contentfull = await Promise.race([
-      //   client.getEntries({
-      //     content_type: "furnitureProduct",
-      //   }),
-      //   timeOut(),
-      // ]);
-      // const newProducts = contentfull.items.map((product) => {
-      const newProducts = data?.items.map((product) => {
-        const { id } = product.sys;
-        const { price, title } = product.fields;
-        const { url: imageSource } = product.fields.image.fields.file;
-        const { company } = product.fields;
-        return { id, price, title, imageSource, company };
+      const data = await fetchProduct();
+      const processedProduct = data?.map((product) => {
+        const item = destructureFetchProduct(product);
+        return item;
       });
-      if (!newProducts) return;
-      setProduct([...newProducts]);
-      setProductPageProduct([...newProducts]);
+      if (!processedProduct) return;
+      setProduct([...processedProduct]);
+      setProductPageProduct([...processedProduct]);
+      setIsLoading(false);
     } catch (error) {
       console.log(error);
+      setIsLoading(false);
     }
   }, []);
 
@@ -74,7 +100,6 @@ const AppContext = ({ children }) => {
     setCart([...cart, newItem]);
     console.log(cart);
   };
-  console.log(cart);
 
   const changeCartType = (id, type) => {
     //remove item from cart
@@ -148,19 +173,12 @@ const AppContext = ({ children }) => {
     return null;
   };
 
-  // const timeOut = () => {
-  //   return new Promise((resolve, reject) => {
-  //     setTimeout(() => {
-  //       resolve(false);
-  //     }, 500);
-  //   });
-  // };
-
   return (
     <ProductContext.Provider
       value={{
         cart,
         products,
+        isLoading,
         isCartOpen,
         productPageProducts,
         addToCart,

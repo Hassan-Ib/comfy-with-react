@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { useProductContext } from "../context/context";
+import { useProductContext } from "../context";
 import { Link } from "react-router-dom";
 
 const StyledArticle = styled.article`
@@ -27,31 +27,36 @@ const StyledLink = styled(Link)`
   text-decoration: none;
   display: inline-block;
 `;
+
+// component
 const Product = ({ imageSource, title, price, id, page }) => {
   const { addToCart, isItemInCart } = useProductContext();
-  const [itemMsg, setItemMsg] = useState({
+  const [alertMsg, setAlertMsg] = useState({
     state: false,
-    msg: "",
+    msg: "item added to cart",
   });
 
   const addToCartHandler = () => {
     const itemInCart = isItemInCart(id);
     if (itemInCart) {
-      setItemMsg({ ...itemMsg, state: true, msg: `${title} already in cart` });
+      setAlertMsg({ ...alertMsg, state: true, msg: `item already in cart` });
       return;
     }
-    setItemMsg({ ...itemMsg, state: true, msg: `${title} added to cart` });
+    setAlertMsg({ ...alertMsg, state: true, msg: `item added to cart` });
     addToCart(id);
   };
-  useEffect(() => {
-    const inCartTimeout = setTimeout(() => {
-      setItemMsg({ ...itemMsg, state: false, msg: "" });
-    }, 1000);
 
+  useEffect(() => {
+    let inCartTimeout;
+    if (alertMsg.state) {
+      inCartTimeout = setTimeout(() => {
+        setAlertMsg({ ...alertMsg, state: false, msg: "" });
+      }, 1000);
+    }
     return () => {
       clearTimeout(inCartTimeout);
     };
-  }, [itemMsg]);
+  }, [alertMsg]);
   return (
     <>
       <StyledArticle className="item">
@@ -59,10 +64,9 @@ const Product = ({ imageSource, title, price, id, page }) => {
           <img src={imageSource} alt={title} className="item__image" />
           <div className="item__btn">
             <StyledLink
-              to={`/product/${id}${page}`}
+              to={`/product/${page}/${id}`}
               className="btn u-btn item__btn--search fas fa-search"
             >
-              {" "}
               view
             </StyledLink>
 
@@ -75,7 +79,7 @@ const Product = ({ imageSource, title, price, id, page }) => {
           </div>
         </div>
         <div className="item__description">
-          {itemMsg.state && <AbsoluteP>{itemMsg.msg}</AbsoluteP>}
+          {alertMsg.state && <AbsoluteP>{alertMsg.msg}</AbsoluteP>}
           <p className="item__name">{title}</p>
           <p className="item__price">${price}</p>
         </div>

@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { useProductContext } from "../context/context";
+import { useProductContext } from "../context";
 
 const Filter = () => {
   const { setProductPageProduct, products } = useProductContext();
@@ -9,7 +9,7 @@ const Filter = () => {
   const filter = (value, filterType) => {
     let newPageProducts;
     if (filterType === "TITLE") {
-      const regex = new RegExp(`^${value}`);
+      const regex = new RegExp(`^${value}`, "i");
       newPageProducts = products.filter((product) => regex.test(product.title));
     }
     if (filterType === "PRICE") {

@@ -1,6 +1,6 @@
 import React from "react";
 import { Navbar, Cart, Galary, Filter } from "../Components";
-import { useProductContext } from "../context/context";
+import { useProductContext } from "../context";
 
 const Product = () => {
   const { productPageProducts } = useProductContext();
