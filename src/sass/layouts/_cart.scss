@@ -7,7 +7,7 @@
     top: 0;
     left: 0;
     background-color: rgba($color-secondary-1, 0.4);
-    @include transform(translateY(120vw));
+    @include transform(translateX(120vw));
     @include transition($transition-1);
     &.cart--open {
       @include transform(translateX(0%));
