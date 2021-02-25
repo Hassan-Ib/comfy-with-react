@@ -1,3 +1,3 @@
-import { AppContext, useProductContext } from "./Context";
+import { AppContext, useProductContext } from "./context";
 
 export { AppContext, useProductContext };
