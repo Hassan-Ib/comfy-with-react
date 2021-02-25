@@ -38,5 +38,35 @@ const contenful = () => {
   });
 };
 const localCart = "cart";
+const destructureFetchProduct = (item) => {
+  const {
+    sys: { id },
+    image: { url: imageSource },
+    price,
+    title,
+    creator,
+  } = item;
+  return { imageSource, price, title, creator, id };
+};
+const fetchProduct = async () => {
+  try {
+    const response = await Promise.race([contenful(), timeOut]);
+    if (!response.timeOut) {
+      if (!response.ok) {
+        throw new Error("failed to fetch data");
+      }
+      console.log(response);
+      const {
+        data: {
+          furnitureProductCollection: { items },
+        },
+      } = await response.json();
+      return items;
+    }
+    throw new Error(response.msg);
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
 
-export { localCart, contenful, timeOut };
+export { localCart, destructureFetchProduct, fetchProduct };

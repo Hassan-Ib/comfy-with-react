@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 // import data from "./data";
-import { timeOut, contenful, localCart } from "./helper";
+import { localCart, destructureFetchProduct, fetchProduct } from "./helper";
 
 // explore?access_token=W3UjDMEZRW869nRjFz0i9QwA7KdSZi6KWCirjeEVpJQ`
 
@@ -14,32 +14,12 @@ const AppContext = ({ children }) => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [productPageProducts, setProductPageProduct] = useState([]);
-  // const [LoadError, setLoadError] = useState({
-  //   state : false,
-  //   message : ""
-  // })
-  // get local cart
-  const fetchProduct = async () => {
-    try {
-      const response = await Promise.race([contenful(), timeOut]);
-      if (!response.timeOut) {
-        if (!response.ok) {
-          throw new Error("failed to fetch data");
-        }
-        console.log(response);
-        const {
-          data: {
-            furnitureProductCollection: { items },
-          },
-        } = await response.json();
-        return items;
-      }
-      throw new Error(response.msg);
-    } catch (error) {
-      throw new Error(error);
-    }
-  };
+  const [loadError, setLoadError] = useState({
+    state: false,
+    message: "",
+  });
 
+  // get local cart
   const getLocalData = () => {
     const localValue = window.localStorage.getItem(localCart);
     if (localValue === null) {
@@ -47,17 +27,6 @@ const AppContext = ({ children }) => {
     } else {
       setCart([...JSON.parse(localValue)]);
     }
-  };
-
-  const destructureFetchProduct = (item) => {
-    const {
-      sys: { id },
-      image: { url: imageSource },
-      price,
-      title,
-      creator,
-    } = item;
-    return { imageSource, price, title, creator, id };
   };
 
   const getProduct = React.useCallback(async () => {
@@ -74,6 +43,7 @@ const AppContext = ({ children }) => {
     } catch (error) {
       console.log(error);
       setIsLoading(false);
+      setLoadError({ state: true, message: error.message });
     }
   }, []);
 
@@ -179,6 +149,7 @@ const AppContext = ({ children }) => {
         cart,
         products,
         isLoading,
+        loadError,
         isCartOpen,
         productPageProducts,
         addToCart,

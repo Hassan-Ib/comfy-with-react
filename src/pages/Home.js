@@ -1,5 +1,5 @@
 import React from "react";
-import { Navbar, Cart, Galary, Loader } from "../Components";
+import { Navbar, Cart, Galary, Loader, Error } from "../Components";
 import { Link } from "react-router-dom";
 import { useProductContext } from "../context";
 // import Cart from
@@ -8,10 +8,26 @@ import FrameImgSm1 from "../images/frame-small-1.jpg";
 import FrameImgSm2 from "../images/frame-small-2.jpg";
 
 const Home = () => {
-  const { products, isLoading } = useProductContext();
+  const { products, isLoading, loadError } = useProductContext();
   const homeProduct = products.filter((product) => product.price < 20);
   if (isLoading) {
     return <Loader />;
+  }
+  if (loadError.state) {
+    // console.log(loadError.message);
+    return (
+      <Error>
+        <h4>{loadError.message}</h4>
+        <button
+          className="u-btn u-btn-style"
+          onClick={() => {
+            window.location.reload();
+          }}
+        >
+          reload page
+        </button>
+      </Error>
+    );
   }
   return (
     <>

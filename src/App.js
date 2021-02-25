@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { Product, Home, About, Error, ProductModal } from "./pages";
+import { Product, Home, About, ErrorPage, ProductModal } from "./pages";
 // import GlobalStyle from "./GlobalCss";
 import "./sass/main.scss";
 function App() {
@@ -20,7 +20,7 @@ function App() {
           <ProductModal />
         </Route>
         <Route path="*">
-          <Error />
+          <ErrorPage />
         </Route>
       </Switch>
     </Router>

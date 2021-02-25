@@ -28,7 +28,7 @@ const CartProducts = ({ imageSource, id, title, price, quantity }) => {
     <article className="cart__item">
       <div className="item--grid">
         <div className="cart__item--img">
-          <img src={imageSource} alt={title} className="image-fit" />
+          <img src={imageSource} alt={title} className="u-image-fit" />
         </div>
         <div className="cart__item--desc">
           <p className="cart__item--title">{title}</p>
@@ -44,7 +44,7 @@ const CartProducts = ({ imageSource, id, title, price, quantity }) => {
         </div>
 
         <button className="u-btn delete__btn cart--btn ">delete</button>
-        <button className="u-btn save__btn cart--btn margin-left">
+        <button className="u-btn save__btn cart--btn u-margin-left">
           save for later
         </button>
       </div>
