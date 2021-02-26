@@ -46,7 +46,6 @@ const destructureFetchProduct = (item) => {
     title,
     creator,
   } = item;
-  console.log(creator);
   return { imageSource, price, title, creator, id };
 };
 const fetchProduct = async () => {

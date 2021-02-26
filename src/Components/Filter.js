@@ -5,7 +5,6 @@ const Filter = () => {
   const { setProductPageProduct, products } = useProductContext();
   const [search, setSearch] = useState("");
   const [priceFilter, setPriceFilter] = useState(100);
-
   const filter = (value, filterType) => {
     let newPageProducts;
     if (filterType === "TITLE") {
@@ -17,7 +16,6 @@ const Filter = () => {
     }
     if (filterType === "COMPANY") {
       if (value === "All") {
-        console.log(value);
         newPageProducts = [...products];
       } else {
         const creatorRegexp = new RegExp(value, "i");
