@@ -94,7 +94,9 @@
     .plus-item {
       padding: 0.3rem 1rem;
     }
-
+    .cart--btn {
+      cursor: pointer;
+    }
     .cart--btn:hover {
       background-color: rgba($color-dark-primary, 0.2);
     }
@@ -113,6 +115,7 @@
       font-size: 1rem;
       letter-spacing: 2px;
       background-color: rgba($color-secondary-1, 0.9);
+      cursor: pointer;
       &:hover {
         background-color: $color-secondary-1;
       }
@@ -123,5 +126,6 @@
     top: 1rem;
     right: 2rem;
     font-size: 1.2rem;
+    cursor: pointer;
   }
 }

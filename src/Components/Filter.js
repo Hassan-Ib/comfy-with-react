@@ -65,14 +65,16 @@ const Filter = () => {
             placeholder="search..."
           />
         </form>
-        <article onClick={handleCompanyBtn} className="companies">
+        <div>
           <h4>Companies</h4>
-          <button className="companies-btn">all</button>
-          <button className="companies-btn">ikea</button>
-          <button className="companies-btn">marcos</button>
-          <button className="companies-btn">caressa</button>
-          <button className="companies-btn">liddy</button>
-        </article>
+          <article onClick={handleCompanyBtn} className="companies">
+            <button className="companies-btn">all</button>
+            <button className="companies-btn">ikea</button>
+            <button className="companies-btn">marcos</button>
+            <button className="companies-btn">caressa</button>
+            <button className="companies-btn">liddy</button>
+          </article>
+        </div>
 
         <form className="price-form">
           <h4>Price range</h4>

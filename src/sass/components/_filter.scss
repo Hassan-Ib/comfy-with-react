@@ -1,19 +1,29 @@
 .filter {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   justify-content: space-around;
+  .search-input {
+    display: inline-block;
+    padding: 0.3rem;
+    border-radius: 5px;
+  }
+
   .companies {
-    flex: 0 1 40%;
+    // flex: 0 1 40%;
+    display: flex;
+    flex-wrap: wrap;
+    // border: 1px solid black;
+
     &-btn {
       font-size: 0.8rem;
-      text-align: center;
       text-transform: capitalize;
       letter-spacing: 1px;
 
       border: none;
+      border-radius: 5px;
+      text-align: left;
       box-shadow: none;
-      margin-top: 0.5rem;
-      padding: 0.5rem;
+      margin: 0.5rem;
       cursor: pointer;
     }
   }
@@ -22,6 +32,18 @@
     .companies {
       display: flex;
       flex-direction: column;
+
+      &-btn {
+        font-size: 0.8rem;
+        text-transform: capitalize;
+        letter-spacing: 1px;
+
+        border: none;
+        box-shadow: none;
+        margin-top: 0.5rem;
+        padding: 0.5rem;
+        cursor: pointer;
+      }
     }
   }
 }

@@ -17,6 +17,7 @@
     width: 25px;
     height: 20px;
     z-index: 2;
+    cursor: pointer;
     @include response(big) {
       width: 30px;
     }
@@ -58,6 +59,7 @@
     }
   }
   .logo {
+    cursor: pointer;
     flex-basis: 50%;
     transform: matrix(1, -0.03, 0.04, 1, 0, 0);
     & > * {
@@ -157,6 +159,7 @@
 
 /* cart--placeholder */
 .cart__placeholder {
+  cursor: pointer;
   position: relative;
   padding: 0;
   background-color: transparent;

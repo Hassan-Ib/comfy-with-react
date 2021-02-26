@@ -16,17 +16,21 @@ const Home = () => {
   if (loadError.state) {
     // console.log(loadError.message);
     return (
-      <Error>
-        <h4>{loadError.message}</h4>
-        <button
-          className="u-btn u-btn-style"
-          onClick={() => {
-            window.location.reload();
-          }}
-        >
-          reload page
-        </button>
-      </Error>
+      <>
+        <Navbar />
+        <Cart />
+        <Error>
+          <h4>{loadError.message}</h4>
+          <button
+            className="u-btn u-btn-style"
+            onClick={() => {
+              window.location.reload();
+            }}
+          >
+            reload page
+          </button>
+        </Error>
+      </>
     );
   }
   return (

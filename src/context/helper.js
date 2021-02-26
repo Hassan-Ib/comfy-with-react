@@ -24,7 +24,7 @@ const timeOut = new Promise((resolve, _) => {
       timeOut: true,
       msg: "service timeOut check your connection and refresh :)",
     });
-  }, 1000);
+  }, 1500);
 });
 
 const contenful = () => {
@@ -56,7 +56,7 @@ const fetchProduct = async () => {
       if (!response.ok) {
         throw new Error("failed to fetch data");
       }
-      console.log(response);
+      // console.log(response);
       const {
         data: {
           furnitureProductCollection: { items },
