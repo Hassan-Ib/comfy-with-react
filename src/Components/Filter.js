@@ -4,7 +4,7 @@ import { useProductContext } from "../context";
 const Filter = () => {
   const { setProductPageProduct, products } = useProductContext();
   const [search, setSearch] = useState("");
-  const [priceFilter, setPriceFilter] = useState(0);
+  const [priceFilter, setPriceFilter] = useState(100);
 
   const filter = (value, filterType) => {
     let newPageProducts;
