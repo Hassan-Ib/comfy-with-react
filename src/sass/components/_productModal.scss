@@ -1,6 +1,27 @@
 .product__modal {
-  // padding: ;
-  height: 80vh;
+  height: 100vh;
+  border: 1px solid black;
+
+  .modal {
+    text-align: center;
+
+    width: 100%;
+    border: 1px solid black;
+    border-radius: 1rem;
+
+    display: flex;
+    flex-wrap: wrap;
+    overflow: hidden;
+    & > * {
+      flex-basis: 50%;
+    }
+
+    .product--name {
+      text-transform: capitalize;
+      font-size: 2rem;
+      margin-top: 2rem;
+    }
+  }
 
   a {
     transition: all 400ms ease-out;

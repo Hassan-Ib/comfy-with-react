@@ -12,10 +12,11 @@
     background-color: $color-white-primary;
     padding-bottom: 2rem;
     align-self: left;
+    border-radius: 10px;
+    overflow: hidden;
 
     &__container {
       position: relative;
-      overflow: hidden;
 
       .item__image {
         display: block;

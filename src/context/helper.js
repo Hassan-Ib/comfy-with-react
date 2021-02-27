@@ -24,7 +24,7 @@ const timeOut = new Promise((resolve, _) => {
       timeOut: true,
       msg: "service timeOut check your connection and refresh :)",
     });
-  }, 1500);
+  }, 5000);
 });
 
 const contenful = () => {

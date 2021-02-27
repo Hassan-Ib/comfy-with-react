@@ -41,9 +41,9 @@ const AppContext = ({ children }) => {
       setProductPageProduct([...processedProduct]);
       setIsLoading(false);
     } catch (error) {
-      console.log(error);
-      setIsLoading(false);
+      // console.log(error);
       setLoadError({ state: true, message: error.message });
+      setIsLoading(false);
     }
   }, []);
 
@@ -51,6 +51,9 @@ const AppContext = ({ children }) => {
     getLocalData();
     getProduct();
   }, [getProduct]);
+
+  // console.log("context", loadError);
+  // console.log("context", isLoading);
 
   const setCartLocally = () => {
     window.localStorage.setItem(localCart, JSON.stringify(cart));
