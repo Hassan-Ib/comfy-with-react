@@ -32,7 +32,7 @@ const CartProducts = ({ imageSource, id, title, price, quantity }) => {
         </div>
         <div className="cart__item--desc">
           <p className="cart__item--title">{title}</p>
-          <p className="cart__item--available">in stuck</p>
+          <p className="cart__item--available">in stock</p>
           <p className="cart__item--price">${price}</p>
         </div>
       </div>
