@@ -3,10 +3,10 @@ import { useProductContext } from "../context";
 
 const CartProducts = ({ imageSource, id, title, price, quantity }) => {
   const {
-    increaseItemQuantity,
-    decreaseItemQuantity,
     deleteItem,
     changeCartType,
+    increaseItemQuantity,
+    decreaseItemQuantity,
   } = useProductContext();
   const handleControl = (e) => {
     const btn = e.target;
