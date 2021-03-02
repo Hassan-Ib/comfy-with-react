@@ -2,8 +2,22 @@ import React, { useState } from "react";
 
 import { Link } from "react-router-dom";
 import { useProductContext } from "../context";
+import { useAuth0 } from "@auth0/auth0-react";
+import styled from "styled-components";
+
+const StyledBtn = styled.button`
+  color: #fff;
+  font-weight: 600;
+  letter-spacing: 1px;
+  background-color: var(--color-secondary-1);
+
+  &:hover {
+    background-color: var(--color-secondary-1-light);
+  }
+`;
 
 const Navbar = () => {
+  const { loginWithRedirect, logout, isAuthenticated } = useAuth0();
   const [isBurgerOpen, setIsBurgerOpen] = useState(false);
   const { setIsCartOpen, cartItemCalc } = useProductContext();
   const openCartHandler = () => {
@@ -45,6 +59,20 @@ const Navbar = () => {
             <Link to="/about" className="nav__link">
               About Us
             </Link>
+          </li>
+          <li className="nav__item ">
+            {isAuthenticated ? (
+              <StyledBtn className="nav__link u-btn" onClick={logout}>
+                log out
+              </StyledBtn>
+            ) : (
+              <StyledBtn
+                className="nav__link u-btn"
+                onClick={loginWithRedirect}
+              >
+                log in
+              </StyledBtn>
+            )}
           </li>
         </ul>
       </nav>

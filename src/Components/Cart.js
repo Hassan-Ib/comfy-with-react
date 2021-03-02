@@ -2,6 +2,8 @@ import React from "react";
 import { useProductContext } from "../context";
 import CartProducts from "./CartProduct";
 import SaveProduct from "./SaveProduct";
+import { Link } from "react-router-dom";
+// import { useAuth0 } from "@auth0/auth0-react";
 
 const Cart = () => {
   const { isCartOpen, setIsCartOpen, cart, cartItemCalc } = useProductContext();
@@ -9,6 +11,7 @@ const Cart = () => {
   const handleCartClose = () => {
     setIsCartOpen(false);
   };
+
   const cartValue = cartItemCalc();
   return (
     <div className={`cart__overlay ${isCartOpen && "cart--open"}`}>
@@ -19,16 +22,20 @@ const Cart = () => {
         ></span>
         <div className="cart__container--header">
           <h4 className="title">
-            total items in cart : {cartValue ? cartValue.totalQuantity : 0}{" "}
-            items
+            total items in cart : ( {cartValue ? cartValue.totalQuantity : 0}{" "}
+            items )
             <p id="total-items-price">
-              Total price : ${" "}
+              Total price :{" "}
               {cartValue ? cartValue.totalPrice.toFixed(2) : "0.00"}
             </p>
           </h4>
-          <button className="u-btn u-btn-big proceed-btn">
+          <Link
+            to="/payment"
+            onClick={handleCartClose}
+            className="u-btn u-btn-big proceed-btn u-link"
+          >
             proceed to checkout
-          </button>
+          </Link>
         </div>
         <section id="cart__items--container" className="cart__items">
           {cart ? (

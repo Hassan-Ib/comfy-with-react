@@ -4,13 +4,23 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import { AppContext } from "./context";
 import { Global } from "./style";
+import { Auth0Provider } from "@auth0/auth0-react";
+
+// domain id =  dev-mgbdfbjd.us.auth0.com
+// client id = 9XUwODbw66voiBghS45reX6DECKdq3YQ
 
 ReactDOM.render(
   <React.StrictMode>
-    <AppContext>
-      <Global />
-      <App />
-    </AppContext>
+    <Auth0Provider
+      domain="dev-mgbdfbjd.us.auth0.com"
+      clientId="9XUwODbw66voiBghS45reX6DECKdq3YQ"
+      redirectUri={window.location.origin}
+    >
+      <AppContext>
+        <Global />
+        <App />
+      </AppContext>
+    </Auth0Provider>
   </React.StrictMode>,
   document.getElementById("root")
 );
