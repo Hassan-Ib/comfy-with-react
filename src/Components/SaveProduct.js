@@ -17,7 +17,7 @@ const SaveProduct = ({ imageSource, id, price, title }) => {
     <article className="cart__item">
       <div className="item--grid">
         <div className="cart__item--img">
-          <img src={imageSource} alt={title} />
+          <img src={imageSource} alt={title} className="u-image-fit" />
         </div>
         <div className="cart__item--desc">
           <p className="cart__item--title">{title}</p>
