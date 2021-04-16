@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const StyledButton = styled.button`
-  color: ${(props) => (props ? props.color : "#000")};
+  color: ${(props) => (props?.color ? props.color : "#000")};
   box-shadow: none;
   padding: 0.5rem 1rem;
   border: none;
@@ -10,12 +10,16 @@ const StyledButton = styled.button`
   border-radius: 5px;
   text-align: center;
   text-transform: capitalize;
-  letter-spacing: 2px;
-  background-color: ${(props) =>
-    props.background ? props.background : "#fff"};
+  letter-spacing: 1px;
+  background-color: ${(props) => (props ? props.background : "#fff")};
+  cursor: pointer;
 `;
-const Button = ({ value, buttonProps }) => {
-  return <StyledButton {...buttonProps}>{value}</StyledButton>;
+const Button = ({ color, background, onClick, children }) => {
+  return (
+    <StyledButton color={color} onClick={onClick} background={background}>
+      {children}
+    </StyledButton>
+  );
 };
 
 export default Button;

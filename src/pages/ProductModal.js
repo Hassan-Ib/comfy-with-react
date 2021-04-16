@@ -23,8 +23,8 @@ const ProductModal = () => {
       </Error>
     );
   }
-  console.log(products);
-  console.log(loadError);
+  // console.log(products);
+  // console.log(loadError);
   const [product] = products.filter((product) => product.id === id);
   return (
     <article className="u-center product__modal">

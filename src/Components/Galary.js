@@ -12,6 +12,9 @@ const Galary = ({ page, productList }) => {
       </>
     );
   }
+  if (productList.length < 1) {
+    return <h2>no item with name</h2>;
+  }
   return (
     <div className="grid__parent">
       {productList.map((product) => {

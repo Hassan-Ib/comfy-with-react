@@ -55,11 +55,6 @@ const Navbar = () => {
               Products
             </Link>
           </li>
-          <li className="nav__item">
-            <Link to="/about" className="nav__link">
-              About Us
-            </Link>
-          </li>
           <li className="nav__item ">
             {isAuthenticated ? (
               <StyledBtn className="nav__link u-btn" onClick={logout}>

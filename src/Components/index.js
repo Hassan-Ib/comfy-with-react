@@ -5,5 +5,6 @@ import Cart from "./Cart";
 import Filter from "./Filter";
 import Loader from "./Loader";
 import Error from "./Error";
+import Button from "./Button";
 
-export { Galary, Navbar, Product, Cart, Filter, Loader, Error };
+export { Galary, Navbar, Product, Cart, Filter, Loader, Error, Button };

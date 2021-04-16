@@ -5,5 +5,15 @@ import Product from "./Product";
 import ProductModal from "./ProductModal";
 import Payment from "./Payment";
 import PrivateRoute from "./PrivateRoute";
+import Login from "./Login";
 
-export { Home, Product, About, ErrorPage, ProductModal, Payment, PrivateRoute };
+export {
+  Home,
+  Product,
+  About,
+  ErrorPage,
+  ProductModal,
+  Payment,
+  PrivateRoute,
+  Login,
+};
