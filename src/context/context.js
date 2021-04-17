@@ -28,6 +28,7 @@ const AppContext = ({ children }) => {
       setCart([...JSON.parse(localValue)]);
     }
   };
+  useEffect(getLocalData, []);
 
   const getProduct = React.useCallback(async () => {
     try {
@@ -48,7 +49,6 @@ const AppContext = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    getLocalData();
     getProduct();
   }, [getProduct]);
 

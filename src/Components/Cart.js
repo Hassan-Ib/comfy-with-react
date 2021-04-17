@@ -51,9 +51,7 @@ const Cart = () => {
         </section>
         <div className="cart__container--header u-margin-top-md">
           {isLaterItem ? (
-            <h3 className="title">
-              Number of items saved for later {isLaterItem}
-            </h3>
+            <h3 className="title">items saved for later ({isLaterItem}) </h3>
           ) : null}
         </div>
         <section id="later__items--container" className="cart__items">
