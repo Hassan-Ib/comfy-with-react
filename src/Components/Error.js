@@ -1,10 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-const Wrapper = styled.section`
-  height: 100%;
+const ErrorWrapper = styled.section`
+  height: ${(props) => (props?.height ? props.height : 100 + "%")};
   text-align: center;
   letter-spacing: 2px;
-  padding-top: 25%;
+  padding-top: ${(props) => (props?.padding ? props.padding : 25 + "%")};
+  margin: ${(props) => (props?.margin ? props.margin : 0 + " auto")};
   h2 {
     font-size: 10rem;
   }
@@ -24,8 +25,8 @@ const Wrapper = styled.section`
     border-radius: 5px;
   }
 `;
-const Error = ({ children }) => {
-  return <Wrapper>{children}</Wrapper>;
+const Error = ({ padding = undefined, height = undefined, children }) => {
+  return <ErrorWrapper>{children}</ErrorWrapper>;
 };
 
 export default Error;
