@@ -1,15 +1,7 @@
 import React from "react";
 import { useProductContext } from "../context";
 
-const CartProducts = ({
-  imageSource,
-  id,
-  title,
-  price,
-  quantity,
-  cartType,
-}) => {
-  console.log(cartType);
+const CartProducts = ({ imageSource, id, title, price, quantity }) => {
   const {
     deleteItem,
     changeCartType,

@@ -24,8 +24,6 @@ const AppContext = ({ children }) => {
     message: "",
   });
 
-  useEffect(getLocalData, []);
-
   const getProduct = React.useCallback(async () => {
     try {
       const data = await fetchProduct();
