@@ -24,17 +24,6 @@ const AppContext = ({ children }) => {
     message: "",
   });
 
-  // get local cart
-  // const getLocalData = () => {
-  //   const localValue = window.localStorage.getItem(localCart);
-  //   if (localValue === null) {
-  //     // setCart([]);
-  //     return []
-  //   } else {
-  //     // setCart([...JSON.parse(localValue)]);
-  //     return [...JSON.parse(localValue)]
-  //   }
-  // };
   useEffect(getLocalData, []);
 
   const getProduct = React.useCallback(async () => {
@@ -59,14 +48,12 @@ const AppContext = ({ children }) => {
     getProduct();
   }, [getProduct]);
 
-  // console.log("context", loadError);
-  // console.log("context", isLoading);
-
-  const setCartLocally = () => {
-    window.localStorage.setItem(localCart, JSON.stringify(cart));
-  };
-
-  useEffect(setCartLocally, [cart]);
+  useEffect(() => {
+    const setCartLocally = () => {
+      window.localStorage.setItem(localCart, JSON.stringify(cart));
+    };
+    setCartLocally();
+  }, [cart]);
 
   const isItemInCart = (id) => {
     const [item] = cart.filter((item) => item.id === id);

@@ -14,7 +14,6 @@ const Home = () => {
     return <Loader />;
   }
   if (loadError.state) {
-    // console.log(loadError.message);
     return (
       <>
         <Navbar />
