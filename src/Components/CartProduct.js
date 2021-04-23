@@ -1,18 +1,28 @@
 import React from "react";
 import { useProductContext } from "../context";
 
-const CartProducts = ({ imageSource, id, title, price, quantity }) => {
+const CartProducts = ({
+  imageSource,
+  id,
+  title,
+  price,
+  quantity,
+  cartType,
+}) => {
+  console.log(cartType);
   const {
     deleteItem,
     changeCartType,
     increaseItemQuantity,
     decreaseItemQuantity,
   } = useProductContext();
+
   const handleControl = (e) => {
     const btn = e.target;
     if (btn.classList.contains("plus-item")) {
       increaseItemQuantity(id);
     }
+
     if (btn.classList.contains("minus-item")) {
       decreaseItemQuantity(id);
     }

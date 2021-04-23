@@ -68,5 +68,15 @@ const fetchProduct = async () => {
     throw new Error(error.message);
   }
 };
+const getLocalData = () => {
+  const localValue = window.localStorage.getItem(localCart);
+  if (localValue === null) {
+    // setCart([]);
+    return [];
+  } else {
+    // setCart([...JSON.parse(localValue)]);
+    return [...JSON.parse(localValue)];
+  }
+};
 
-export { localCart, destructureFetchProduct, fetchProduct };
+export { localCart, destructureFetchProduct, fetchProduct, getLocalData };

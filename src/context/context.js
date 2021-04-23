@@ -1,6 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
 // import data from "./data";
-import { localCart, destructureFetchProduct, fetchProduct } from "./helper";
+import {
+  localCart,
+  destructureFetchProduct,
+  fetchProduct,
+  getLocalData,
+} from "./helper";
 
 // explore?access_token=W3UjDMEZRW869nRjFz0i9QwA7KdSZi6KWCirjeEVpJQ`
 
@@ -10,7 +15,7 @@ const ProductContext = React.createContext();
 // context provider
 const AppContext = ({ children }) => {
   const [products, setProduct] = useState([]);
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState(() => getLocalData());
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [productPageProducts, setProductPageProduct] = useState([]);
@@ -20,14 +25,16 @@ const AppContext = ({ children }) => {
   });
 
   // get local cart
-  const getLocalData = () => {
-    const localValue = window.localStorage.getItem(localCart);
-    if (localValue === null) {
-      setCart([]);
-    } else {
-      setCart([...JSON.parse(localValue)]);
-    }
-  };
+  // const getLocalData = () => {
+  //   const localValue = window.localStorage.getItem(localCart);
+  //   if (localValue === null) {
+  //     // setCart([]);
+  //     return []
+  //   } else {
+  //     // setCart([...JSON.parse(localValue)]);
+  //     return [...JSON.parse(localValue)]
+  //   }
+  // };
   useEffect(getLocalData, []);
 
   const getProduct = React.useCallback(async () => {
@@ -71,7 +78,7 @@ const AppContext = ({ children }) => {
     const [item] = products.filter((product) => product.id === id);
     const newItem = { ...item, quantity: 1, cartType: "cart" };
     setCart([...cart, newItem]);
-    console.log(cart);
+    // console.log(cart);
   };
 
   const changeCartType = (id, type) => {
@@ -83,9 +90,9 @@ const AppContext = ({ children }) => {
       }
       return item;
     });
-    console.log(cart);
+    // console.log(cart);
     setCart([...newCart]);
-    console.log(cart);
+    // console.log(cart);
   };
 
   const increaseItemQuantity = (id) => {
