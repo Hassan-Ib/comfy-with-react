@@ -1,4 +1,2 @@
-import Theme from "./Theme";
-import Global from "./GlobalCss";
-
-export { Theme, Global };
+export { default as Theme } from "./Theme";
+export { default as Global } from "./GlobalCss";
