@@ -80,14 +80,13 @@
     top: 100%;
     left: 0;
     padding: 2rem 3rem;
-    width: 100%;
+    // width: 0%;
     z-index: -2;
     opacity: 0;
     cursor: none;
-    transform: translate(-100%);
+    transform: translateX(-100%);
     @include response(tab) {
       width: 50%;
-      // flex: 0;
     }
     @include response(lg) {
       padding: 0;
@@ -147,15 +146,19 @@
     }
   }
   .showLinks {
-    background-color: $color-secondary-1-light;
+    background-color: rgba(9, 16, 54, 0.9);
     z-index: 2;
     opacity: 1;
-    transform: translate(0);
+    border-radius: 10px;
+    transform: translateX(0);
+    box-shadow: 0rem 0rem 1rem 0.2rem rgba(0, 0, 0, 0.3),
+      0rem 0rem 1rem 0.2rem rgba(0, 0, 0, 0.3);
     @include transition($transition-with-delay);
     cursor: pointer;
     @include response(lg) {
       background-color: transparent;
       transition: none;
+      box-shadow: none;
     }
   }
 }

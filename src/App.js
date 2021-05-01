@@ -11,6 +11,7 @@ import {
 } from "./pages";
 // import GlobalStyle from "./GlobalCss";
 import "./sass/main.scss";
+
 function App() {
   return (
     <Router>

@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
-import { useProductContext } from "../context";
+import { useProductContext } from "../../context";
+// import "./_filter.scss";
 
 const Filter = () => {
   const { setProductPageProduct, products } = useProductContext();

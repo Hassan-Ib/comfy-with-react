@@ -1,10 +1,8 @@
-import Navbar from "./Navbar";
-import Product from "./Product";
-import Galary from "./Galary";
-import Cart from "./Cart";
-import Filter from "./Filter";
-import Loader from "./Loader";
-import Error from "./Error";
-import Button from "./Button";
-
-export { Galary, Navbar, Product, Cart, Filter, Loader, Error, Button };
+export { default as Navbar } from "./Navbar";
+export { default as Product } from "./Product";
+export { default as Galary } from "./Galary";
+export { default as Cart } from "./Cart";
+export { default as Loader } from "./Loader";
+export { default as Error } from "./Error";
+export { default as Button } from "./Button";
+export { default as Filter } from "./filter/Filter";

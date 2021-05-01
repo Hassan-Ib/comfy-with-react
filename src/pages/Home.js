@@ -3,9 +3,9 @@ import { Navbar, Cart, Galary, Loader, Error } from "../Components";
 import { Link } from "react-router-dom";
 import { useProductContext } from "../context";
 // import Cart from
-import FrameImgBig from "../images/frame-big.jpg";
-import FrameImgSm1 from "../images/frame-small-1.jpg";
-import FrameImgSm2 from "../images/frame-small-2.jpg";
+import FrameImgBig from "../assets/frame-big.jpg";
+import FrameImgSm1 from "../assets/frame-small-1.jpg";
+import FrameImgSm2 from "../assets/frame-small-2.jpg";
 
 const Home = () => {
   const { products, isLoading, loadError } = useProductContext();

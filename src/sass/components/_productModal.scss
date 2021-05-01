@@ -5,10 +5,11 @@
   .modal {
     text-align: center;
 
-    width: 100%;
+    width: 80%;
     border: 1px solid black;
     border-radius: 1rem;
 
+    box-shadow: 1px 1px 0.5 rgba(0, 0, 0, 0.4);
     display: flex;
     flex-wrap: wrap;
     overflow: hidden;
